@@ -12,6 +12,8 @@ public class Kiviatt extends JComponent {
     public static final Dimension PREFERED_SIZE = new Dimension(DEF_WIDTH, DEF_HEIGTH);
     public static final Color[] TAB_COLOR = {Color.red, Color.blue, Color.yellow, Color.DARK_GRAY, Color.yellow};
 
+
+
     private KiviattModel myModel;
     private int criteriaNumber;
     private int valueOnCriteria[];

@@ -3,13 +3,18 @@ package model;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+/**
+ * Le model decrit les axes de criteres du composant
+ * Chaque critere a 3 valeurs : valeur - Vmin - Vmax
+ *
+ */
 public class KiviattModel implements TableModel {
     public static int N_DEF_CRITERES = 4;
     public static String[] DEF_CRITERES = {"c1", "c2", "c3", "c4"};
     public static int[][] DEF_VALEURS = {{1,0,10},{2,0,20},{3,0,30}, {4,0,40}}; // {valeur, vmin, vmax}
 
     String[] tab_criteres;
-    int[][] valeur;
+    int[][] valeur; // Exemple : valeur[0][] -> est le tableau des 3 valeurs qui correspondent au critère[0]
 
 
     public KiviattModel() {
@@ -44,23 +49,23 @@ public class KiviattModel implements TableModel {
 
     @Override
     public int getColumnCount() {
-        return 0;
+        return tab_criteres.length;
     }
 
     /**
      *
-     * @param rowIndex le critere concerne
-     * @param columnIndex ne sert à rien, on prend la premiere case qui correspond à la valeur
+     * @param rowIndex On ne s'en sert pas, on prend la premiere case qui correspond à la valeur
+     * @param columnIndex  le critere concerne
      * @return
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return valeur[rowIndex][0];
+        return valeur[columnIndex][0]; // On n'utilise pas rowIndex
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        valeur[columnIndex][0] = (Integer)aValue; // On utilise pas rowIndex
+        valeur[columnIndex][0] = (Integer)aValue; // On n'utilise pas rowIndex
     }
 
 
