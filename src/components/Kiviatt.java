@@ -36,7 +36,7 @@ public class Kiviatt extends JComponent {
     public void renseignerValeurAxe() {
         for (int i=0; i<criteriaNumber; i++)
         {
-            valueOnCriteria[i] = (Integer) myModel.getValueAt(i, 10000);
+            valueOnCriteria[i] = (Integer) myModel.getValueAt(10000, i);
         }
     }
 
@@ -67,17 +67,15 @@ public class Kiviatt extends JComponent {
 
         for(int i=0; i<criteriaNumber; i++)
         {
-            x2 = radius * (int) (Math.cos(Math.toRadians(angle))) + x0 ;
-            y2 = radius * (int) (Math.sin(Math.toRadians(angle))) + y0 ;
+            x2 = (int) (radius *  Math.cos(Math.toRadians(angle))) + x0;
+            y2 = (int) (radius *  Math.sin(Math.toRadians(angle))) + y0;
 
-            System.out.println("[0,0] - ["+x2+","+y2+"]");
+            System.out.println(i+") • ["+x0+","+y0+"] - ["+x2+","+y2+"] - angle= "+angle);
 
             g2.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.setColor(TAB_COLOR[i]);
             g2.drawLine(x0, y0, x2, y2);
 
-
-            System.out.println("Angle=" + angle + " Span=" +span);
 
             angle += span;
         }

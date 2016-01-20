@@ -56,7 +56,7 @@ public class KiviattModel implements TableModel {
      *
      * @param rowIndex On ne s'en sert pas, on prend la premiere case qui correspond à la valeur
      * @param columnIndex  le critere concerne
-     * @return
+     * @return int valeur de l'axe
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
