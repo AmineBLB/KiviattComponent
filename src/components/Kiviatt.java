@@ -18,6 +18,7 @@ public class Kiviatt extends JComponent {
 
     public Kiviatt() {
         this(new KiviattModel());
+
     }
 
     public Kiviatt(KiviattModel km) {
