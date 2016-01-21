@@ -39,14 +39,14 @@ public class MainFrame  extends JFrame {
 
 
                 Kiviatt km = new Kiviatt(kmo);
-                Item item = new Item();
+               // Item item = new Item();
 
                 fenetre.add(km);
-                fenetre.add(item);
+                //fenetre.add(item);
 
                 km.setLocation(50, 50);
                 km.setVisible(true);
-                item.setVisible(true);
+                //item.setVisible(true);
 
             }
         });

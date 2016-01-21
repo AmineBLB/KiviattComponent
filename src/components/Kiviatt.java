@@ -28,6 +28,7 @@ public class Kiviatt extends JComponent {
         myModel = km;
         criteriaNumber = km.getCriteriaNumber();
         valueOnCriteria = new int[criteriaNumber];
+        valueDisplay = new Item[criteriaNumber];
         renseignerValeurAxe();
         setLayout(null);
         setSize(PREFERED_SIZE);
@@ -81,7 +82,6 @@ public class Kiviatt extends JComponent {
             add(valueDisplay[i]);
             valueDisplay[i].setLocation(x0 + (x2 - x0) / 2, y0 + (y2 - y0) / 2);
             valueDisplay[i].setVisible(true);
-
 
 
             angle += span;
