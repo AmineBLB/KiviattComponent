@@ -10,13 +10,14 @@ public class Kiviatt extends JComponent {
     public static int DEF_HEIGTH = DEF_WIDTH;
     public static int radius = DEF_WIDTH/2;
     public static final Dimension PREFERED_SIZE = new Dimension(DEF_WIDTH, DEF_HEIGTH);
-    public static final Color[] TAB_COLOR = {Color.red, Color.blue, Color.yellow, Color.DARK_GRAY, Color.yellow};
+    public static final Color[] TAB_COLOR = {Color.red, Color.blue, Color.yellow, Color.DARK_GRAY, Color.yellow, Color.ORANGE};
 
 
 
     private KiviattModel myModel;
     private int criteriaNumber;
     private int valueOnCriteria[];
+    private Item[] valueDisplay;
 
     public Kiviatt() {
         this(new KiviattModel());
@@ -75,6 +76,12 @@ public class Kiviatt extends JComponent {
             g2.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2.setColor(TAB_COLOR[i]);
             g2.drawLine(x0, y0, x2, y2);
+
+            valueDisplay[i] = new Item(valueOnCriteria[i]);
+            add(valueDisplay[i]);
+            valueDisplay[i].setLocation(x0 + (x2 - x0) / 2, y0 + (y2 - y0) / 2);
+            valueDisplay[i].setVisible(true);
+
 
 
             angle += span;

@@ -1,5 +1,6 @@
 package gui;
 
+import components.Item;
 import components.Kiviatt;
 import model.KiviattModel;
 
@@ -29,8 +30,8 @@ public class MainFrame  extends JFrame {
             public void run() {
                 MainFrame fenetre = new MainFrame("Test Kiviatt");
 
-                String[] DEF_CRITERES = {"c1", "c2", "c3", "c4", "c5"};
-                int[][] DEF_VALEURS = {{1,0,10},{2,0,20},{3,0,30}, {4,0,40}, {5,0,10}};
+                String[] DEF_CRITERES = {"c1", "c2", "c3", "c4", "c5", "c6"};
+                int[][] DEF_VALEURS = {{1,0,10},{2,0,20},{3,0,30}, {4,0,40}, {5,0,10}, {6,0,10}};
 
 
 
@@ -38,9 +39,14 @@ public class MainFrame  extends JFrame {
 
 
                 Kiviatt km = new Kiviatt(kmo);
+                Item item = new Item();
+
                 fenetre.add(km);
+                fenetre.add(item);
+
                 km.setLocation(50, 50);
                 km.setVisible(true);
+                item.setVisible(true);
 
             }
         });
