@@ -10,12 +10,22 @@ public class Item extends JComponent {
     public static final Dimension PREFERED_SIZE = new Dimension(DEF_WIDTH, DEF_HEIGTH);
 
     private int valeur;
+    public int angleDirecteur;
+    public int coordX, coordY;
 
-    public Item(int val) {
+    public Item(int val, int angle, int x2, int y2) {
         super();
-        valeur = val;
         setSize(PREFERED_SIZE);
         setLayout(null);
+
+        valeur = val;
+        angleDirecteur = angle;
+        coordX = x2;
+        coordY = y2;
+
+        addMouseMotionListener(new ItemMouseAdapter(this));
+        setLocation(coordX, coordY);
+
     }
 
     public int getValeur() {
@@ -23,8 +33,8 @@ public class Item extends JComponent {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
+        super.paint(g);
         g.fillOval(0, 0, DEF_WIDTH, DEF_HEIGTH);
     }
 
