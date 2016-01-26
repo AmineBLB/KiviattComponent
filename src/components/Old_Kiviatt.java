@@ -6,7 +6,7 @@ import model.Old_KiviattModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class Kiviatt extends JComponent {
+public class Old_Kiviatt extends JComponent {
     public static int DEF_WIDTH = 300;
     public static int DEF_HEIGTH = DEF_WIDTH;
     public static int radius = DEF_WIDTH/2;
@@ -22,13 +22,13 @@ public class Kiviatt extends JComponent {
 
     private KiviatModel monModel;
 
-    public Kiviatt() {
+    public Old_Kiviatt() {
         this(new Old_KiviattModel());
 
     }
 
     // FIXME à enlever
-    public Kiviatt(Old_KiviattModel km) {
+    public Old_Kiviatt(Old_KiviattModel km) {
         myModel = km;
         criteriaNumber = km.getCriteriaNumber();
         valueDisplay = new Item[criteriaNumber];
@@ -40,7 +40,7 @@ public class Kiviatt extends JComponent {
         drawValues();
     }
 
-    public Kiviatt(KiviatModel model) {
+    public Old_Kiviatt(KiviatModel model) {
         monModel = model;
     }
 
