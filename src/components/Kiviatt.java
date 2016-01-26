@@ -1,6 +1,7 @@
 package components;
 
-import model.KiviattModel;
+import model.KiviatModel;
+import model.Old_KiviattModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,18 +15,20 @@ public class Kiviatt extends JComponent {
 
 
 
-    private KiviattModel myModel;
+    private Old_KiviattModel myModel;
     private int criteriaNumber;
-    private int valueOnCriteria[];
     private Item[] valueDisplay;
     private int[][] axeDisplay;
 
+    private KiviatModel monModel;
+
     public Kiviatt() {
-        this(new KiviattModel());
+        this(new Old_KiviattModel());
 
     }
 
-    public Kiviatt(KiviattModel km) {
+    // FIXME à enlever
+    public Kiviatt(Old_KiviattModel km) {
         myModel = km;
         criteriaNumber = km.getCriteriaNumber();
         valueDisplay = new Item[criteriaNumber];
@@ -35,21 +38,11 @@ public class Kiviatt extends JComponent {
 
         fillAxes();
         drawValues();
-
-        //valueOnCriteria = new int[criteriaNumber]; FIXME a enlever
-        //renseignerValeurAxe(); FIXME a enlever
     }
 
-
-    /* FIXME a enlever
-    public void renseignerValeurAxe() {
-        for (int i=0; i<criteriaNumber; i++)
-        {
-            valueOnCriteria[i] = (Integer) myModel.getValueAt(10000, i);
-        }
-
-
-    }*/
+    public Kiviatt(KiviatModel model) {
+        monModel = model;
+    }
 
     @Override
     public Dimension getPreferredSize() {
@@ -135,10 +128,8 @@ public class Kiviatt extends JComponent {
     public void drawValues() {
         for(int i=0; i<criteriaNumber; i++) {
             add(valueDisplay[i]);
-            //valueDisplay[i].setLocation(x0 + (x2 - x0) / 2, y0 + (y2 - y0) / 2);
             valueDisplay[i].setVisible(true);
-
-
+            //valueDisplay[i].setLocation(x0 + (x2 - x0) / 2, y0 + (y2 - y0) / 2);
         }
     }
 }

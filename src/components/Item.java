@@ -12,6 +12,7 @@ public class Item extends JComponent {
     private int valeur;
     public int angleDirecteur;
     public int coordX, coordY;
+    private ItemMouseAdapter myAdapter;
 
     public Item(int val, int angle, int x2, int y2) {
         super();
@@ -23,7 +24,9 @@ public class Item extends JComponent {
         coordX = x2;
         coordY = y2;
 
-        addMouseMotionListener(new ItemMouseAdapter(this));
+        myAdapter = new ItemMouseAdapter(this);
+        addMouseListener(myAdapter);
+        addMouseMotionListener(myAdapter);
         setLocation(coordX, coordY);
 
     }
@@ -32,6 +35,14 @@ public class Item extends JComponent {
         return valeur;
     }
 
+    public void setCoord(int x, int y) {
+        coordX = x;
+        coordY = y;
+    }
+
+    public void decrementerX() {
+        coordX --;
+    }
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -54,5 +65,9 @@ public class Item extends JComponent {
         y -= DEF_HEIGTH/2;
         super.setLocation(x, y);
 
+    }
+
+    public void setCoordY(int i) {
+        coordY = i;
     }
 }
