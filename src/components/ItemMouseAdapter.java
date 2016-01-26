@@ -1,5 +1,7 @@
 package components;
 
+import controller.Controller;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -7,9 +9,11 @@ public class ItemMouseAdapter extends MouseAdapter {
 
     private Item myItem;
     int previousX, previousY;
+    Controller controller;
 
-    public ItemMouseAdapter(Item item) {
+    public ItemMouseAdapter(Item item, Controller cont) {
         myItem = item;
+        controller = cont;
     }
 
     @Override
@@ -37,11 +41,19 @@ public class ItemMouseAdapter extends MouseAdapter {
         //        (int)Math.tan(Math.toRadians(myItem.angleDirecteur))*x);
 
         if(x < previousX)
+        {
             myItem.coordX --;
-        else
-            myItem.coordX ++;
+            controller.decrementerValeur(myItem.getIdAxe());
 
-        myItem.coordY = ((int)Math.tan(-Math.toRadians(myItem.angleDirecteur))*myItem.coordX) + Kiviatt.radius;
+        }
+        else
+        {
+            myItem.coordX ++;
+            controller.incrementerValeur((myItem.getIdAxe()));
+        }
+
+
+        myItem.coordY = ((int)Math.tan(Math.toRadians(myItem.angleDirecteur))*myItem.coordX) + Kiviat.radius;
         myItem.setLocation(myItem.coordX, myItem.coordY);
 
         //myItem.setLocation(x,

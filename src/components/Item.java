@@ -1,6 +1,8 @@
 package components;
 
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,26 +11,35 @@ public class Item extends JComponent {
     public static int DEF_HEIGTH = DEF_WIDTH;
     public static final Dimension PREFERED_SIZE = new Dimension(DEF_WIDTH, DEF_HEIGTH);
 
+    private int idAxe;
+    private int axe;
     private int valeur;
     public int angleDirecteur;
     public int coordX, coordY;
     private ItemMouseAdapter myAdapter;
+    Controller cont;
 
-    public Item(int val, int angle, int x2, int y2) {
+    public Item(int id, int val, int angle, int x2, int y2, Controller c) {
         super();
         setSize(PREFERED_SIZE);
         setLayout(null);
 
+        cont = c;
+        idAxe = id;
         valeur = val;
         angleDirecteur = angle;
         coordX = x2;
         coordY = y2;
 
-        myAdapter = new ItemMouseAdapter(this);
+        myAdapter = new ItemMouseAdapter(this, cont);
         addMouseListener(myAdapter);
         addMouseMotionListener(myAdapter);
         setLocation(coordX, coordY);
 
+    }
+
+    public int getIdAxe() {
+        return idAxe;
     }
 
     public int getValeur() {

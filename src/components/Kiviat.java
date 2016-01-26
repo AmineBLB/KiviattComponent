@@ -1,10 +1,12 @@
 package components;
 
+import controller.Controller;
 import model.AxeCritere;
 import model.KiviatModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,7 @@ public class Kiviat extends JComponent {
     private KiviatModel monModel;
     private Item[] valuesItem;
     private int[][] axeCoord;
+    Controller cont;
 
     public Kiviat() {
         this(new KiviatModel(listeDefaultCriteres()));
@@ -29,7 +32,7 @@ public class Kiviat extends JComponent {
         monModel = model;
         valuesItem = new Item[monModel.getRowCount()];
         axeCoord = new int[monModel.getRowCount()][2]; // tableau de coordonnees [num critere] [x -> 0/y -> 1]
-
+        cont = new Controller(this);
         preDrawingOperations();
 
         setLayout(null);
@@ -62,8 +65,8 @@ public class Kiviat extends JComponent {
         int y0 = radius;
 
         g2.drawLine(DEF_HEIGTH, 0, 0, 0);
-        g2.drawLine(0, DEF_HEIGTH, 0, 0);
-        g2.drawLine(0, 0, DEF_WIDTH, 0);
+        g2.drawLine(0, DEF_HEIGTH, DEF_HEIGTH, DEF_HEIGTH);
+        g2.drawLine(DEF_HEIGTH, DEF_HEIGTH, DEF_WIDTH, 0);
         g2.drawLine(0, 0, 0, DEF_HEIGTH);
 
         for (int i =0; i<monModel.getRowCount(); i++) {
@@ -80,13 +83,23 @@ public class Kiviat extends JComponent {
         int x0 = radius;
         int y0 = radius;
 
+        Double x1, y1;
+
         for (int i =0; i<monModel.getRowCount(); i++) {
             axeCoord[i][0] = (int) (radius *  Math.cos(Math.toRadians(angle))) + x0;
             axeCoord[i][1] = (int) (radius *  Math.sin(Math.toRadians(angle))) + y0;
-            valuesItem[i] = new Item((Integer) monModel.getValueAt(i,1),
+            x1 = new Double(x0 + (axeCoord[i][0] - x0) * ((new Double((Integer)monModel.getValueAt(i, 1)) / (((new Double((Integer) monModel.getValueAt(i, 3)) - (new Double((Integer) monModel.getValueAt(i, 2)))))))));
+            y1 = new Double(y0 + (axeCoord[i][1] - y0) * ((new Double((Integer)monModel.getValueAt(i, 1)) / (((new Double((Integer) monModel.getValueAt(i, 3)) - (new Double((Integer) monModel.getValueAt(i, 2)))))))));
+
+            valuesItem[i] = new Item(
+                    i,
+                    (Integer) monModel.getValueAt(i,1),
                     angle,
-                    x0 + (axeCoord[i][0] - x0) / 2,
-                    y0 + (axeCoord[i][1] - y0) / 2);
+                    x1.intValue(),
+                    y1.intValue(),
+                    cont);
+
+
             add(valuesItem[i]);
             valuesItem[i].setVisible(true);
             angle += span;
@@ -96,12 +109,12 @@ public class Kiviat extends JComponent {
     public static ArrayList<AxeCritere> listeDefaultCriteres() {
         ArrayList<AxeCritere> data = new ArrayList<AxeCritere>();
 
-        AxeCritere ac1 = new AxeCritere("Critere 1", 1,0,10);
-        AxeCritere ac2 = new AxeCritere("Critere 2", 2,0,20);
-        AxeCritere ac3 = new AxeCritere("Critere 3", 3,0,30);
-        AxeCritere ac4 = new AxeCritere("Critere 4", 4,0,40);
-        AxeCritere ac5 = new AxeCritere("Critere 5", 5,0,50);
-        AxeCritere ac6 = new AxeCritere("Critere 6", 6,0,60);
+        AxeCritere ac1 = new AxeCritere("Critere 1 : Red"   , 5,0,10);
+        AxeCritere ac2 = new AxeCritere("Critere 2 : Blue"  , 5,0,20);
+        AxeCritere ac3 = new AxeCritere("Critere 3 : Yellow", 15,0,30);
+        AxeCritere ac4 = new AxeCritere("Critere 4 : Gray"  , 24,0,40);
+        AxeCritere ac5 = new AxeCritere("Critere 5 : Yellow", 50,0,50);
+        AxeCritere ac6 = new AxeCritere("Critere 6 : Orange", 55,0,60);
 
 
         data.add(ac1);

@@ -16,7 +16,7 @@ public class MainFrame  extends JFrame {
 
     public MainFrame(String title) throws HeadlessException {
         super(title);
-        setSize(900, 700);
+        setSize(1000, 700);
         setVisible(true);
         setLayout(null);
 
@@ -26,16 +26,33 @@ public class MainFrame  extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainFrame fenetre = new MainFrame("Test Kiviatt");
+                MainFrame fenetre = new MainFrame("Test Old_Kiviatt");
                 fenetre.setLayout(new BorderLayout());
 
                 Kiviat monKiviat = new Kiviat();
 
+                JPanel kivPanel = new JPanel();
+                JPanel tabPanel = new JPanel();
+
+                kivPanel.setLayout(null);
+                kivPanel.setVisible(true);
+
+                //tabPanel.setLayout(null);
+                tabPanel.setVisible(true);
+                tabPanel.setSize(300, 300);
+                tabPanel.setLocation(50, 50);
+
 
                 JTable table = new JTable(monKiviat.getMonModel());
                 table.setSize(200,200);
-                fenetre.add(new JScrollPane(table), BorderLayout.EAST);
-                fenetre.add(monKiviat,BorderLayout.CENTER);
+                table.setLocation(50, 50);
+                tabPanel.add(new JScrollPane(table));
+                kivPanel.add(monKiviat);
+
+                monKiviat.setLocation(50, 50);
+
+                fenetre.add(kivPanel,BorderLayout.CENTER);
+                fenetre.add(tabPanel,BorderLayout.EAST);
 
 
                 /*
@@ -47,7 +64,7 @@ public class MainFrame  extends JFrame {
                 Old_KiviattModel kmo = new Old_KiviattModel(DEF_CRITERES.length, DEF_CRITERES, DEF_VALEURS);
                 //JTable table = new JTable(kmo);
 
-                Kiviatt km = new Kiviatt(kmo);
+                Old_Kiviatt km = new Old_Kiviatt(kmo);
 
                // Item item = new Item();
 

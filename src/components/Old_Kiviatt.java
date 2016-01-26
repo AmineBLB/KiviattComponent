@@ -114,10 +114,18 @@ public class Old_Kiviatt extends JComponent {
         {
             x2 = (int) (radius *  Math.cos(Math.toRadians(angle))) + x0;
             y2 = (int) (radius *  Math.sin(Math.toRadians(angle))) + y0;
-            valueDisplay[i] = new Item( (Integer) myModel.getValueAt(10000, i),
+            valueDisplay[i] = new Item( i,(Integer) myModel.getValueAt(10000, i),
                     angle,
                     x0 + (x2 - x0) / 2,
-                    y0 + (y2 - y0) / 2);
+                    y0 + (y2 - y0) / 2,
+                    null);
+
+
+            //x0 + (axeCoord[i][0] - x0) * (int) ((Double) monModel.getValueAt(i, 1) / (((Integer) monModel.getValueAt(i, 3) - (Double) monModel.getValueAt(i, 2)))),
+            //y0 + (axeCoord[i][1] - y0) * (int) ((Double) monModel.getValueAt(i, 1) / (((Integer) monModel.getValueAt(i, 3) - (Double) monModel.getValueAt(i, 2)))));
+            //x0 + (axeCoord[i][0] - x0) / 2,
+            //y0 + (axeCoord[i][1] - y0) / 2);
+
             axeDisplay[i][0] = x2;
             axeDisplay[i][1] = y2;
 
