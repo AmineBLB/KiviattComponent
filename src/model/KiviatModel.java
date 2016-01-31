@@ -1,21 +1,22 @@
 package model;
 
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Vector;
 
-/**
- * Created by Mohamed-Amine on 26/01/2016.
- */
+
 public class KiviatModel extends DefaultTableModel {
-    public ArrayList<AxeCritere> data;
-    public String[] columnNames = {"Critere", "Valeur", "Valeur Min","Valeur Max"};
+    private ArrayList<AxeCritere> data; // Liste des valeurs
+    private String[] columnNames = {"Critere", "Valeur", "Valeur Min","Valeur Max"}; // Intitule des colonnes
 
-    public KiviatModel(ArrayList<AxeCritere> list) {
+    private KiviatModel(ArrayList<AxeCritere> list) {
         data = list;
     }
 
+    /**
+     * Compte le nombre de criteres renseignes
+     *
+     * @return le nombre de criteres renseignes
+     */
     @Override
     public int getRowCount() {
         if(data != null)
@@ -24,16 +25,34 @@ public class KiviatModel extends DefaultTableModel {
             return 0;
     }
 
+    /**
+     * Compte le <b>nombre de colonne</b>
+     *
+     * @return le nombre de colonne
+     */
     @Override
     public int getColumnCount() {
         return columnNames.length;
     }
 
+    /**
+     * Recupere l'intitule d'une colonne
+     *
+     * @param column la position de la colonne
+     * @return l'intitule de la colonne
+     */
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
     }
 
+    /**
+     * Interroge un champs d'un critere donne
+     *
+     * @param rowIndex    la position dans la liste du critere concerne
+     * @param columnIndex le champs concerne [O: Nom, 1: Valeur, 2: Valeur Minimum, 3: Valeur Maximum]
+     * @return objet correspondant a la ligne et la colonne passe en parametres
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
@@ -46,6 +65,12 @@ public class KiviatModel extends DefaultTableModel {
 
     }
 
+    /**
+     * Modifie un champs d'un critere donne
+     *
+     * @param row    la position dans la liste du critere concerne
+     * @param column le champs concerne [O: Nom, 1: Valeur, 2: Valeur Minimum, 3: Valeur Maximum]
+     */
     @Override
     public void setValueAt(Object aValue, int row, int column) {
         switch (column) {
@@ -56,6 +81,12 @@ public class KiviatModel extends DefaultTableModel {
         }
     }
 
+    /**
+     * Verifier si le champs est modifiable
+     * @param row la position dans la liste du critere concerne
+     * @param column le champs concerne [O: Nom, 1: Valeur, 2: Valeur Minimum, 3: Valeur Maximum]
+     * @return true si le champs est modifiable
+     */
     @Override
     public boolean isCellEditable(int row, int column) {
         switch (column) {
@@ -64,6 +95,11 @@ public class KiviatModel extends DefaultTableModel {
         }
     }
 
+    /**
+     * Ajouter un critere
+     *
+     * @param rowData nouveau critere a ajouter a la liste
+     */
     public void ajoutCritere(AxeCritere rowData) {
         data.add(rowData);
     }
